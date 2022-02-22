@@ -7,6 +7,8 @@ const getRandom = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+getRandom();
+
 const getCoordinates = (min, max, afterPoint) => {
   if (min < 0 || max <= min) {
     return false;
@@ -17,3 +19,5 @@ const getCoordinates = (min, max, afterPoint) => {
   const result = Math.random() * (max - min) + min;
   return result.toFixed(afterPoint);
 };
+
+getCoordinates();
