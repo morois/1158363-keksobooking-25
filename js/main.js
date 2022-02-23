@@ -1,23 +1,31 @@
-const getRandom = (min, max) => {
+const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
-  if (min < 0 || max <= min) {
-    return false;
+  if(min < 0) {
+    min = 0;
+  }
+  if (max < min) {
+    [min, max] = [max, min];
+  }
+  if (max === min) {
+    return min;
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-getRandom();
+getRandomInt(1, 9);
 
-const getCoordinates = (min, max, afterPoint) => {
-  if (min < 0 || max <= min) {
-    return false;
+const getRandomFloat = (min, max, afterPoint = 0) => {
+  if(min < 0) {
+    min = 0;
   }
-  if(!afterPoint)  {
-    return false;
+  if (max < min) {
+    [min, max] = [max, min];
   }
-  const result = Math.random() * (max - min) + min;
-  return result.toFixed(afterPoint);
+  if (max === min) {
+    return min;
+  }
+  return +(Math.random() * (max - min) + min).toFixed(afterPoint);
 };
 
-getCoordinates();
+getRandomFloat(1, 2, 2);
