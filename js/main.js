@@ -131,6 +131,3 @@ const getPromo = () => {
   };
 };
 
-// console.log(Array.from({length: 10}, getPromo));
-
-console.log(JSON.stringify(Array.from({length: 10}, getPromo), null, 2));
