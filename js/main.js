@@ -103,7 +103,7 @@ const getArrRandom = (list) => {
   return result;
 };
 
-const getPromo = () => {
+const createPromo = () => {
   const avatar = `img/avatars/user${  counter()  }.png`;
   const lat = getRandomFloat(35.65000, 35.70000, 5);
   const lng = getRandomFloat(139.70000, 139.80000, 5);
@@ -130,4 +130,8 @@ const getPromo = () => {
     }
   };
 };
+
+const promo = Array.from({length: 10}, createPromo);
+
+promo();
 
