@@ -76,14 +76,27 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
+const MIN_LAT = 35.65000;
+const MAX_LAT = 35.70000;
+const FLOAT = 5;
+const MIN_LNG = 139.70000;
+const MAX_LNG = 139.80000;
+
+const MIN_PRICE = 1000;
+const MAX_PRICE = 100000;
+
+const MIN_ROOMS = 1;
+const MAX_ROOMS = 10;
+
+const MIN_GUESTS = 1;
+const MAX_GUESTS = 5;
+
+const PROMO_COUNT = 10;
+
 const getCounter = () => {
   let count = 1;
   return function () {
-    if(count < 10) {
-      return `0${  count++}`;
-    } else {
-      return count++;
-    }
+    return count < 10 ? `0${  count++}` : count++;
   };
 };
 
@@ -105,8 +118,8 @@ const getArrRandom = (list) => {
 
 const createPromo = () => {
   const avatar = `img/avatars/user${  counter()  }.png`;
-  const lat = getRandomFloat(35.65000, 35.70000, 5);
-  const lng = getRandomFloat(139.70000, 139.80000, 5);
+  const lat = getRandomFloat(MIN_LAT, MAX_LAT, FLOAT);
+  const lng = getRandomFloat(MIN_LNG, MAX_LNG, FLOAT);
   return {
     autor: {
       avatar,
@@ -114,10 +127,10 @@ const createPromo = () => {
     offer: {
       title: getRandomArrElement(TITLE),
       adress: `${lat  }, ${  lng}`,
-      price: getRandomInt(1000, 100000),
+      price: getRandomInt(MIN_PRICE, MAX_PRICE),
       type: getRandomArrElement(TYPE),
-      rooms: getRandomInt(1, 10),
-      guests: getRandomInt(1, 5),
+      rooms: getRandomInt(MIN_ROOMS, MAX_ROOMS),
+      guests: getRandomInt(MIN_GUESTS, MAX_GUESTS),
       checkin: getRandomArrElement(CHECKIN),
       checkout: getRandomArrElement(CHECKOUT),
       features: getArrRandom(FEATURES),
@@ -131,7 +144,7 @@ const createPromo = () => {
   };
 };
 
-const promo = Array.from({length: 10}, createPromo);
+const getPromo = () => Array.from({length: PROMO_COUNT}, createPromo);
 
-promo();
+getPromo();
 
