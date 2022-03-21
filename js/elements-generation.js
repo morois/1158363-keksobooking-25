@@ -77,5 +77,5 @@ similarPromo.forEach(({autor, offer}) => {
   promoFragment.append(promoElement);
 });
 
-  mapContainer.append(promoFragment);
+mapContainer.append(promoFragment);
 
