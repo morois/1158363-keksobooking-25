@@ -2,6 +2,8 @@ import {getPromo} from './promo-setup.js';
 
 const mapContainer = document.querySelector('#map-canvas');
 const popupTemplateCard = document.querySelector('#card').content.querySelector('.popup');
+const similarPromo = getPromo();
+const promoFragment = document.createDocumentFragment();
 
 const popupOfferType = {
   flat: 'Кравтира',
@@ -24,13 +26,16 @@ const getPopupCapacity = (room, guest) => {
 };
 
 const getPopupFeatures = (features) => {
+
   const featuresContainer = document.createElement('ul');
 
   features.forEach((feature) => {
-    const featurePopupItem = document.createElement('li');
-    featurePopupItem.classList.add('popup__feature');
-    featurePopupItem.classList.add(`popup__feature--${feature}`);
-    featuresContainer.appendChild(featurePopupItem);
+    const featureListItem = document.createElement('li');
+
+    featureListItem.classList.add('popup__feature');
+    featureListItem.classList.add(`popup__feature--${feature}`);
+
+    featuresContainer.appendChild(featureListItem);
   });
   return featuresContainer.innerHTML;
 };
@@ -38,6 +43,7 @@ const getPopupFeatures = (features) => {
 const getPopupPhotos = (photos) => {
 
   const photoPopupContainer = document.createElement('div');
+  photoPopupContainer.classList.add('popup-photos');
 
   photos.forEach((photo) => {
     const photoPopupItem = document.createElement('img');
@@ -46,16 +52,11 @@ const getPopupPhotos = (photos) => {
     photoPopupItem.width = 45;
     photoPopupItem.height = 40;
     photoPopupItem.alt='Фотография жилья';
-
-    photoPopupContainer.append(photoPopupItem);
+    photoPopupContainer.appendChild(photoPopupItem);
   });
+
   return photoPopupContainer.innerHTML;
 };
-
-const similarPromo = getPromo();
-
-const promoFragment = document.createDocumentFragment();
-
 
 similarPromo.forEach(({autor, offer}) => {
   const promoElement = popupTemplateCard.cloneNode(true);
@@ -74,7 +75,7 @@ similarPromo.forEach(({autor, offer}) => {
   promoElement.querySelector('.popup__description').textContent = offer.description;
   promoElement.querySelector('.popup__photos').innerHTML = getPopupPhotos(offer.photos);
 
-  promoFragment.append(promoElement);
+  mapContainer.append(promoElement);
 });
 
 mapContainer.append(promoFragment);
