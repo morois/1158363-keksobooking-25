@@ -5,7 +5,8 @@ const TITLE = [
   'Комната с видом на Асгард',
   'Палата №6',
   'Дворец Саурона',
-  'Покои в Хогвартсе'
+  'Покои в Хогвартсе',
+  'Ходячий Замок'
 ];
 
 const TYPE = [
@@ -60,12 +61,12 @@ const MIN_PRICE = 1000;
 const MAX_PRICE = 100000;
 
 const MIN_ROOMS = 1;
-const MAX_ROOMS = 10;
+const MAX_ROOMS = 5;
 
 const MIN_GUESTS = 1;
 const MAX_GUESTS = 5;
 
-const PROMO_COUNT = 10;
+const PROMO_COUNT = 1;
 
 const createPromo = () => {
   const avatar = `img/avatars/user${  counter()  }.png`;
@@ -77,7 +78,7 @@ const createPromo = () => {
     },
     offer: {
       title: getRandomArrElement(TITLE),
-      adress: `${lat  }, ${  lng}`,
+      address: `${lat  }, ${  lng}`,
       price: getRandomInt(MIN_PRICE, MAX_PRICE),
       type: getRandomArrElement(TYPE),
       rooms: getRandomInt(MIN_ROOMS, MAX_ROOMS),
