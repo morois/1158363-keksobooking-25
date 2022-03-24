@@ -25,19 +25,34 @@ const getPopupCapacity = (room, guest) => {
   } return `${room} комнаты для ${guest} гостей`;
 };
 
+// const getPopupFeatures = (features) => {
+
+//   const featuresContainer = document.createElement('ul');
+
+//   features.forEach((feature) => {
+//     const featureListItem = document.createElement('li');
+
+//     featureListItem.classList.add('popup__feature');
+//     featureListItem.classList.add(`popup__feature--${feature}`);
+
+//     featuresContainer.appendChild(featureListItem);
+//   });
+//   return featuresContainer.innerHTML;
+// };
+
 const getPopupFeatures = (features) => {
 
-  const featuresContainer = document.createElement('ul');
+  const featuresContainer = popupTemplateCard.querySelector('.popup__features');
+  const featuresFragment = document.createDocumentFragment();
 
   features.forEach((feature) => {
-    const featureListItem = document.createElement('li');
+    const featureListItem = featuresContainer.querySelector(`popup__feature--${feature}`);
 
-    featureListItem.classList.add('popup__feature');
-    featureListItem.classList.add(`popup__feature--${feature}`);
-
-    featuresContainer.appendChild(featureListItem);
+    if (featureListItem) {
+      featuresFragment.append(featureListItem);
+    }
   });
-  return featuresContainer.innerHTML;
+  return featuresContainer.appendChild(featuresFragment).outerHTML;
 };
 
 const getPopupPhotos = (photos) => {
