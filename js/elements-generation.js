@@ -6,53 +6,42 @@ const similarPromo = getPromo();
 const promoFragment = document.createDocumentFragment();
 
 const popupOfferType = {
-  flat: 'Кравтира',
+  flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дровец',
   hotel: 'Отель'
 };
 
+const SINGLE_GUEST_COUNT = 1;
+const SINGLE_ROOM_COUNT = 1;
+const ROOMS_COUNT = 5;
+
 const getPopupCapacity = (room, guest) => {
-  if (room === 1 && guest === 1) {
+  if (room === SINGLE_ROOM_COUNT && guest === SINGLE_GUEST_COUNT) {
     return `${room} комната для ${guest} гостя`;
-  } else if (room === 1) {
+  } else if (room === SINGLE_ROOM_COUNT) {
     return `${room} комната для ${guest} гостей`;
-  } else if (guest === 1) {
+  } else if (guest === SINGLE_GUEST_COUNT) {
     return `${room} комнаты для ${guest} гостя`;
-  } else if (room === 5) {
+  } else if (room === ROOMS_COUNT) {
     return `${room} комнат для ${guest} гостей`;
   } return `${room} комнаты для ${guest} гостей`;
 };
 
-// const getPopupFeatures = (features) => {
-
-//   const featuresContainer = document.createElement('ul');
-
-//   features.forEach((feature) => {
-//     const featureListItem = document.createElement('li');
-
-//     featureListItem.classList.add('popup__feature');
-//     featureListItem.classList.add(`popup__feature--${feature}`);
-
-//     featuresContainer.appendChild(featureListItem);
-//   });
-//   return featuresContainer.innerHTML;
-// };
-
 const getPopupFeatures = (features) => {
 
-  const featuresContainer = popupTemplateCard.querySelector('.popup__features');
-  const featuresFragment = document.createDocumentFragment();
+  const featuresContainer = document.createElement('ul');
 
   features.forEach((feature) => {
-    const featureListItem = featuresContainer.querySelector(`popup__feature--${feature}`);
+    const featureListItem = document.createElement('li');
 
-    if (featureListItem) {
-      featuresFragment.append(featureListItem);
-    }
+    featureListItem.classList.add('popup__feature');
+    featureListItem.classList.add(`popup__feature--${feature}`);
+
+    featuresContainer.appendChild(featureListItem);
   });
-  return featuresContainer.appendChild(featuresFragment).outerHTML;
+  return featuresContainer.innerHTML;
 };
 
 const getPopupPhotos = (photos) => {
@@ -70,7 +59,7 @@ const getPopupPhotos = (photos) => {
     photoPopupContainer.appendChild(photoPopupItem);
   });
 
-  return photoPopupContainer.innerHTML;
+  return photoPopupContainer.outerHTML;
 };
 
 similarPromo.forEach(({autor, offer}) => {
