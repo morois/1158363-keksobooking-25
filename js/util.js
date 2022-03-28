@@ -39,9 +39,9 @@ const getRandomArrElement = (elements) => elements[getRandomInt(0, elements.leng
 
 const getArrRandom = (list) => {
   let result = [];
-  const count = getRandomInt(0, list.length - 1);
+  const count = getRandomInt(0, list.length);
   const copyList = [...list];
-  for (let i = 1; i < count; i++) {
+  for (let i = 0; i < count; i++) {
     const index = getRandomInt(0, list.length - 1);
     const item = copyList.splice(index, 1);
     result = result.concat(item);
