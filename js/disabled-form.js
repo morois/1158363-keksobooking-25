@@ -12,5 +12,15 @@ const addDisabled = () => {
   }
 };
 
-export {addDisabled};
+const removeDisabled = () => {
+  adForm.classList.remove('ad-form--disabled');
+  for(let i = 0; i < adFormELements.length; i++) {
+    adFormELements[i].disabled = false;
+  }
+  for(let j = 0; j < mapFilters.length; j++) {
+    mapFilters[j].disabled = false;
+  }
+};
+
+export {addDisabled, removeDisabled};
 
