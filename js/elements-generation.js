@@ -13,14 +13,18 @@ const popupOfferType = {
   hotel: 'Отель'
 };
 
+const SINGLE_GUEST = 1;
+const SINGLE_ROOM = 1;
+const ROOMS_COUNT = 5;
+
 const getPopupCapacity = (room, guest) => {
-  if (room === 1 && guest === 1) {
+  if (room === SINGLE_ROOM && guest === SINGLE_GUEST) {
     return `${room} комната для ${guest} гостя`;
-  } else if (room === 1) {
+  } else if (room === SINGLE_ROOM) {
     return `${room} комната для ${guest} гостей`;
-  } else if (guest === 1) {
+  } else if (guest === SINGLE_GUEST) {
     return `${room} комнаты для ${guest} гостя`;
-  } else if (room === 5) {
+  } else if (room === ROOMS_COUNT) {
     return `${room} комнат для ${guest} гостей`;
   } return `${room} комнаты для ${guest} гостей`;
 };
