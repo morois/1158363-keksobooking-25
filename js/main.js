@@ -7,5 +7,7 @@ setTimeout(removeDisabled, 5000);
 
 getPromo();
 
+import './form.js';
+
 import './elements-generation.js';
 

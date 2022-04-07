@@ -6,7 +6,7 @@ const similarPromo = getPromo();
 const promoFragment = document.createDocumentFragment();
 
 const popupOfferType = {
-  flat: 'Кравтира',
+  flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дровец',
