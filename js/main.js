@@ -5,4 +5,3 @@ getPromo();
 import './form.js';
 
 import './elements-generation.js';
-
