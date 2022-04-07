@@ -15,7 +15,7 @@ const popupOfferType = {
 
 const SINGLE_GUEST = 1;
 const SINGLE_ROOM = 1;
-const ROOMS = 5;
+const ROOMS_COUNT = 5;
 
 const getPopupCapacity = (room, guest) => {
   if (room === SINGLE_ROOM && guest === SINGLE_GUEST) {
@@ -24,7 +24,7 @@ const getPopupCapacity = (room, guest) => {
     return `${room} комната для ${guest} гостей`;
   } else if (guest === SINGLE_GUEST) {
     return `${room} комнаты для ${guest} гостя`;
-  } else if (room === ROOMS) {
+  } else if (room === ROOMS_COUNT) {
     return `${room} комнат для ${guest} гостей`;
   } return `${room} комнаты для ${guest} гостей`;
 };
