@@ -6,11 +6,11 @@ const addDisabled = () => {
   adForm.classList.add('ad-form--disabled');
 
   adFormELements.forEach((elem) => {
-    elem.disabled =true;
+    elem.setAttribute('disabled', true);
   });
 
   mapFilters.forEach((filter) => {
-    filter.disabled = true;
+    filter.setAttribute('disabled', true);
   });
 };
 
@@ -18,11 +18,11 @@ const removeDisabled = () => {
   adForm.classList.remove('ad-form--disabled');
 
   adFormELements.forEach((elem) => {
-    elem.disabled = false;
+    elem.removeAttribute('disabled');
   });
 
   mapFilters.forEach((filter) => {
-    filter.disabled = false;
+    filter.removeAttribute('disabled');
   });
 };
 

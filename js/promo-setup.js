@@ -66,7 +66,7 @@ const MAX_ROOMS = 5;
 const MIN_GUESTS = 1;
 const MAX_GUESTS = 5;
 
-const PROMO_COUNT = 1;
+const PROMO_COUNT = 10;
 
 const createPromo = () => {
   const avatar = `img/avatars/user${  counter()  }.png`;

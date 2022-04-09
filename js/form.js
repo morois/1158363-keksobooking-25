@@ -1,4 +1,7 @@
 const adForm = document.querySelector('.ad-form');
+const priceSlider= adForm.querySelector('.ad-form__slider');
+const priceInput = adForm.querySelector('#price');
+const typeHousing = adForm.querySelector('#type');
 
 const TYPES_MIN_PRICE = {
   bungalow: 0,
@@ -11,6 +14,7 @@ const TYPES_MIN_PRICE = {
 const MAX_ROOMS = 100;
 const MIN_LENGTH_TITLE = 30;
 const MAX_LENGTH_TITLE = 100;
+const MIN_PRICE = 0;
 const MAX_PRICE = 100000;
 
 const checkCapacity = (capacity, rooms) => {
@@ -101,5 +105,25 @@ const validateForm = (form) => {
     }
   });
 };
+
+noUiSlider.create(priceSlider, {
+  start: 0,
+  step: 1,
+  connect: 'lower',
+  range: {
+    min: MIN_PRICE,
+    max: MAX_PRICE
+  }
+});
+
+priceSlider.noUiSlider.on('update', (...rest) => {
+  priceInput.value = priceSlider.noUiSlider.get();
+});
+
+typeHousing.addEventListener('change', (evt) => {
+  if (+priceInput.value < TYPES_MIN_PRICE[typeHousing.value]) {
+    priceSlider.noUiSlider.set(TYPES_MIN_PRICE[typeHousing.value]);
+  };
+});
 
 validateForm(adForm);
