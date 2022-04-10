@@ -414,7 +414,7 @@ fieldset {
 }
 
 .ad-form__slider:not(#fake-id) .noUi-connect {
-  background-color: #353535;
+  background-color: #ff5533;
 }
 
 .ad-form__slider:not(#fake-id) .noUi-handle {
@@ -424,7 +424,7 @@ fieldset {
   right: -5px;
   top: -5px;
   cursor: grab;
-  background-color: #999999;
+  background-color: rgb(255, 85, 51);
 }
 
 .ad-form__slider:not(#fake-id) .noUi-handle::after,
@@ -510,7 +510,7 @@ fieldset {
 }
 
 .features__checkbox:checked + .features__label {
-  background-color: #ff5635;
+  background-color: rgb(255, 85, 51);
 }
 
 .features__checkbox:checked + .features__label--wifi {
