@@ -129,7 +129,6 @@ const validateForm = (form) => {
     if (+TYPES_MIN_PRICE[typeOfHousing.value]) {
       priceSlider.noUiSlider.set(TYPES_MIN_PRICE[typeOfHousing.value]);
     }
-    priceField.placeholder = TYPES_MIN_PRICE[typeOfHousing.value];
     if (priceField.value > 0) {
       pristine.validate(priceField);
     }
