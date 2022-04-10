@@ -2,8 +2,8 @@ import { removeDisabled, addDisabled } from './disabled-form.js';
 import { getPromo } from './promo-setup.js';
 import {createPromoPopup} from './elements-generation.js';
 
-const CENTER_LAT = 35.652832;
-const CENTER_LNG = 139.839478;
+const CENTER_LAT = 35.68612;
+const CENTER_LNG = 139.75352;
 const addressField = document.querySelector('#address');
 
 addDisabled();
@@ -18,7 +18,7 @@ const map = L.map('map-canvas')
       lat: CENTER_LAT,
       lng: CENTER_LNG,
     },
-    10
+    13
   );
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -67,11 +67,12 @@ points.forEach((point) => {
       ...point.location,
     },
     {
-      promoIcon,
+      icon: promoIcon,
     }
   );
 
   promoMarkers
     .addTo(map)
-    .bindPopup(createPromoPopup(points));
+    .bindPopup(createPromoPopup(point));
 });
+

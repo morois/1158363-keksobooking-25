@@ -1,7 +1,10 @@
 const adForm = document.querySelector('.ad-form');
-const priceSlider= adForm.querySelector('.ad-form__slider');
-const priceInput = adForm.querySelector('#price');
-const typeHousing = adForm.querySelector('#type');
+
+const MAX_ROOMS = 100;
+const MIN_LENGTH_TITLE = 30;
+const MAX_LENGTH_TITLE = 100;
+const MIN_PRICE = 0;
+const MAX_PRICE = 100000;
 
 const TYPES_MIN_PRICE = {
   bungalow: 0,
@@ -10,12 +13,6 @@ const TYPES_MIN_PRICE = {
   house: 5000,
   palace: 10000,
 };
-
-const MAX_ROOMS = 100;
-const MIN_LENGTH_TITLE = 30;
-const MAX_LENGTH_TITLE = 100;
-const MIN_PRICE = 0;
-const MAX_PRICE = 100000;
 
 const checkCapacity = (capacity, rooms) => {
   if (rooms === MAX_ROOMS) {
@@ -48,6 +45,7 @@ const validateForm = (form) => {
   const typeOfHousing = form.querySelector('#type');
   const timeInField = form.querySelector('#timein');
   const timeOutField = form.querySelector('#timeout');
+  const priceSlider= adForm.querySelector('.ad-form__slider');
 
   const pristine = new window.Pristine(form, {
     classTo: 'ad-form__element',
@@ -59,7 +57,7 @@ const validateForm = (form) => {
     priceField,
     (value) => value >= TYPES_MIN_PRICE[typeOfHousing.value],
     () =>
-      `Минимальная цена типа жилья: ${
+      `Минимальная цена выбранного типа жилья: ${
         TYPES_MIN_PRICE[typeOfHousing.value]
       } руб.`
   );
@@ -104,26 +102,38 @@ const validateForm = (form) => {
       return 'invalid form';
     }
   });
+
+  noUiSlider.create(priceSlider, {
+    start: 1000,
+    step: 1,
+    connect: 'lower',
+    range: {
+      min: MIN_PRICE,
+      max: MAX_PRICE
+    },
+    format: {
+      to: (value) => value.toFixed(0),
+      from: (value) => parseFloat(value)
+    }
+  });
+
+  priceSlider.noUiSlider.on('update', () => {
+    priceField.value = priceSlider.noUiSlider.get();
+  });
+
+  priceSlider.noUiSlider.on('change', () => {
+    pristine.validate(priceField);
+  });
+
+  typeOfHousing.addEventListener('change', () => {
+    if (+TYPES_MIN_PRICE[typeOfHousing.value]) {
+      priceSlider.noUiSlider.set(TYPES_MIN_PRICE[typeOfHousing.value]);
+    }
+    priceField.placeholder = TYPES_MIN_PRICE[typeOfHousing.value];
+    if (priceField.value > 0) {
+      pristine.validate(priceField);
+    }
+  });
 };
-
-noUiSlider.create(priceSlider, {
-  start: 0,
-  step: 1,
-  connect: 'lower',
-  range: {
-    min: MIN_PRICE,
-    max: MAX_PRICE
-  }
-});
-
-priceSlider.noUiSlider.on('update', (...rest) => {
-  priceInput.value = priceSlider.noUiSlider.get();
-});
-
-typeHousing.addEventListener('change', (evt) => {
-  if (+priceInput.value < TYPES_MIN_PRICE[typeHousing.value]) {
-    priceSlider.noUiSlider.set(TYPES_MIN_PRICE[typeHousing.value]);
-  };
-});
 
 validateForm(adForm);
