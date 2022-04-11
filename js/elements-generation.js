@@ -1,9 +1,9 @@
-import {getPromo} from './promo-setup.js';
+// import {getPromo} from './promo-setup.js';
 
-const mapContainer = document.querySelector('#map-canvas');
+// const mapContainer = document.querySelector('#map-canvas');
 const popupTemplateCard = document.querySelector('#card').content.querySelector('.popup');
-const similarPromo = getPromo();
-const promoFragment = document.createDocumentFragment();
+// const similarPromo = getPromo();
+// const promoFragment = document.createDocumentFragment();
 
 const popupOfferType = {
   flat: 'Квартира',
@@ -62,9 +62,9 @@ const getPopupPhotos = (photos) => {
   return photoPopupContainer.innerHTML;
 };
 
-similarPromo.forEach(({autor, offer}) => {
+const createPromoPopup = (point) => {
   const promoElement = popupTemplateCard.cloneNode(true);
-
+  const {autor, offer} = point;
   const price = `${ offer.price  }₽/ночь.`;
   const popupTime = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
@@ -79,8 +79,7 @@ similarPromo.forEach(({autor, offer}) => {
   promoElement.querySelector('.popup__description').textContent = offer.description;
   promoElement.querySelector('.popup__photos').innerHTML = getPopupPhotos(offer.photos);
 
-  mapContainer.append(promoElement);
-});
+  return promoElement;
+};
 
-mapContainer.append(promoFragment);
-
+export {createPromoPopup};

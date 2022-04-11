@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="leaflet/leaflet.css">
+    <link rel="stylesheet" href="nouislider/nouislider.css">
     <title>Кексобукинг</title>
   </head>
   <body>
@@ -196,7 +198,7 @@
             <label class="ad-form__label" for="address"
               >Адрес (координаты)</label
             >
-            <input id="address" name="address" type="text" />
+            <input id="address" name="address" type="text" readonly/>
           </fieldset>
           <fieldset class="ad-form__element">
             <label class="ad-form__label" for="type">Тип жилья</label>
@@ -214,11 +216,11 @@
               id="price"
               name="price"
               type="number"
-              placeholder="5000"
+              placeholder="1000"
               required
               data-pristine-required-message="Обязательное поле"
             />
-            <div class="ad-form__slider"></div>
+            <div class="ad-form__slider " ></div>
           </fieldset>
           <fieldset class="ad-form__element ad-form__element--time">
             <label class="ad-form__label" for="timein"
@@ -266,35 +268,7 @@
               value="wifi"
               id="feature-wifi"
             />
-            <labelconst adForm = document.querySelector('.ad-form');
-const adFormELements = adForm.querySelectorAll('.ad-form__element, .ad-form-header__input');
-const mapFilters = document.querySelectorAll('.map__filter, .map__features');
-
-const addDisabled = () => {
-  adForm.classList.add('ad-form--disabled');
-
-  adFormELements.forEach((elem) => {
-    elem.disabled =true;
-  });
-
-  mapFilters.forEach((filter) => {
-    filter.disabled = true;
-  });
-};
-
-const removeDisabled = () => {
-  adForm.classList.remove('ad-form--disabled');
-
-  adFormELements.forEach((elem) => {
-    elem.disabled = false;
-  });
-
-  mapFilters.forEach((filter) => {
-    filter.disabled = false;
-  });
-};
-
-export {addDisabled, removeDisabled};
+            <label
               class="features__label features__label--wifi"
               for="feature-wifi"
               >Wi-Fi</label
@@ -511,5 +485,7 @@ export {addDisabled, removeDisabled};
     </template>
     <script src="pristine/pristine.min.js" type="text/javascript"></script>
     <script src="js/main.js" type="module"></script>
+    <script src="leaflet/leaflet.js"></script>
+    <script src="nouislider/nouislider.js"></script>
   </body>
 </html>
