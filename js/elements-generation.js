@@ -1,16 +1,12 @@
-// import {getPromo} from './promo-setup.js';
-
-// const mapContainer = document.querySelector('#map-canvas');
 const popupTemplateCard = document.querySelector('#card').content.querySelector('.popup');
-// const similarPromo = getPromo();
-// const promoFragment = document.createDocumentFragment();
+
 
 const popupOfferType = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дровец',
-  hotel: 'Отель'
+  hotel: 'Отель',
 };
 
 const SINGLE_GUEST = 1;

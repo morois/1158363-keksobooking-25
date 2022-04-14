@@ -1,5 +1,4 @@
 import { removeDisabled, addDisabled } from './disabled-form.js';
-import { getPromo } from './promo-setup.js';
 import {createPromoPopup} from './elements-generation.js';
 
 const CENTER_LAT = 35.68612;
@@ -52,7 +51,6 @@ marker.on('moveend', (evt) => {
 
 marker.addTo(map);
 
-const points = getPromo();
 
 const promoIcon = L.icon({
   iconUrl: './img/pin.svg',
@@ -60,19 +58,21 @@ const promoIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
+const renderPoints = (points) => {
+  points.forEach((point) => {
+    const promoMarkers = L.marker(
+      {
+        ...point.location,
+      },
+      {
+        icon: promoIcon,
+      }
+    );
 
-points.forEach((point) => {
-  const promoMarkers = L.marker(
-    {
-      ...point.location,
-    },
-    {
-      icon: promoIcon,
-    }
-  );
+    promoMarkers
+      .addTo(map)
+      .bindPopup(createPromoPopup(point));
+  });
+};
 
-  promoMarkers
-    .addTo(map)
-    .bindPopup(createPromoPopup(point));
-});
-
+export {renderPoints};

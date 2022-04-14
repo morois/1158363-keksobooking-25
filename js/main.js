@@ -1,7 +1,6 @@
-import {getPromo} from './promo-setup.js';
-import './map.js';
-
-getPromo();
-// import './elements-generation.js';
 import './form.js';
+import './elements-generation.js';
+import { loadData } from './fetch-request.js';
+import {renderPoints} from './map.js';
 
+loadData((data) => renderPoints(data));
