@@ -140,12 +140,16 @@ const validateForm = (form) => {
   });
 };
 
-resetButton.addEventListener('click', () => {
+const resetForm = () => {
   adForm.reset();
   mapFilters.reset();
   priceSlider.noUiSlider.reset();
   resetMap();
   resetAddress();
-});
+};
+
+resetButton.addEventListener('click', resetForm);
 
 validateForm(adForm);
+
+export {resetForm};

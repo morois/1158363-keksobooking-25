@@ -2,16 +2,22 @@ const body = document.querySelector('body');
 const successMessage = body.querySelector('#success').content.querySelector('.success');
 const errorMessage = body.querySelector('#error').content.querySelector('.error');
 const map = body.querySelector('.map');
+const submitButton = document.querySelector('.ad-form__submit');
 
 const messageSuccess = () => {
   const messageNode = successMessage.cloneNode(true);
+  submitButton.setAttribute('disabled', 'true');
+  window.addEventListener('click', () => {
+    messageNode.remove();
+    submitButton.removeAttribute('disabled');
+  });
   body.appendChild(messageNode);
 };
 
 const messageError = () => {
   const messageNode = errorMessage.cloneNode(true);
-  const button = messageNode.content.querySelector('.error__button');
-  button.on('click', () => {
+  const button = messageNode.querySelector('.error__button');
+  button.addEventListener('click', () => {
     messageNode.remove();
   });
   body.appendChild(messageNode);
