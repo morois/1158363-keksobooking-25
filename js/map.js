@@ -78,6 +78,7 @@ const promoIcon = L.icon({
 const markerGroup = L.layerGroup().addTo(map);
 
 const renderPoints = (points) => {
+  markerGroup.eachLayer((point) => point.remove());
   points.forEach((point) => {
     const promoMarkers = L.marker(
       {
