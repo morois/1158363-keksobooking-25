@@ -47,9 +47,10 @@ const filterPoints = (data) => () => {
 };
 
 const initFilters = (data) => {
-  filters.forEach((filter) => {
+  [...filters, ...featureFilters].forEach((filter) => {
     filter.addEventListener('change', debounce(filterPoints(data)));
   });
+  filterPoints(data)();
 };
 
 export { initFilters };
