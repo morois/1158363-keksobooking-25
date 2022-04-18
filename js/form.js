@@ -1,4 +1,10 @@
+import { postData } from './fetch-request.js';
+import { resetMap, resetAddress } from './map.js';
+
 const adForm = document.querySelector('.ad-form');
+const resetButton = document.querySelector('.ad-form__reset');
+const priceSlider = adForm.querySelector('.ad-form__slider');
+const mapFilters = document.querySelector('.map__filters');
 
 const MAX_ROOMS = 100;
 const MIN_LENGTH_TITLE = 30;
@@ -45,7 +51,7 @@ const validateForm = (form) => {
   const typeOfHousing = form.querySelector('#type');
   const timeInField = form.querySelector('#timein');
   const timeOutField = form.querySelector('#timeout');
-  const priceSlider= adForm.querySelector('.ad-form__slider');
+
 
   const pristine = new window.Pristine(form, {
     classTo: 'ad-form__element',
@@ -92,14 +98,13 @@ const validateForm = (form) => {
     timeInField.value = evt.target.value;
   });
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
     const isValid = pristine.validate();
 
     if (isValid) {
-      return 'valid form';
-    } else {
-      return 'invalid form';
+      const formData = new FormData(evt.target);
+      postData(formData);
     }
   });
 
@@ -134,5 +139,13 @@ const validateForm = (form) => {
     }
   });
 };
+
+resetButton.addEventListener('click', () => {
+  adForm.reset();
+  mapFilters.reset();
+  priceSlider.noUiSlider.reset();
+  resetMap();
+  resetAddress();
+});
 
 validateForm(adForm);

@@ -60,18 +60,18 @@ const getPopupPhotos = (photos) => {
 
 const createPromoPopup = (point) => {
   const promoElement = popupTemplateCard.cloneNode(true);
-  const {autor, offer} = point;
+  const {author, offer} = point;
   const price = `${ offer.price  }₽/ночь.`;
   const popupTime = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
-  promoElement.querySelector('.popup__avatar').src = autor.avatar;
+  promoElement.querySelector('.popup__avatar').src = author.avatar;
   promoElement.querySelector('.popup__title').textContent = offer.title;
   promoElement.querySelector('.popup__text--address').textContent = offer.address;
   promoElement.querySelector('.popup__text--price').textContent = price;
   promoElement.querySelector('.popup__type').textContent = popupOfferType[offer.type];
   promoElement.querySelector('.popup__text--capacity').textContent = getPopupCapacity(offer.rooms, offer.guests);
   promoElement.querySelector('.popup__text--time').textContent = popupTime;
-  promoElement.querySelector('.popup__features').innerHTML = getPopupFeatures(offer.features);
+  promoElement.querySelector('.popup__features').innerHTML = getPopupFeatures(offer.features || []);
   promoElement.querySelector('.popup__description').textContent = offer.description;
   promoElement.querySelector('.popup__photos').innerHTML = getPopupPhotos(offer.photos);
 

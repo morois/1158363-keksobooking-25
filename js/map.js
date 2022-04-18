@@ -3,6 +3,7 @@ import {createPromoPopup} from './elements-generation.js';
 
 const CENTER_LAT = 35.68612;
 const CENTER_LNG = 139.75352;
+const ZOOM = 13;
 const addressField = document.querySelector('#address');
 
 addDisabled();
@@ -17,7 +18,7 @@ const map = L.map('map-canvas')
       lat: CENTER_LAT,
       lng: CENTER_LNG,
     },
-    13
+    ZOOM,
   );
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -42,6 +43,22 @@ const marker = L.marker(
   }
 );
 
+const resetMap = () => {
+  marker.setLatLng({
+    lat: CENTER_LAT,
+    lng: CENTER_LNG,
+  });
+
+  map.setView({
+    lat: CENTER_LAT,
+    lng: CENTER_LNG,
+  }, ZOOM );
+};
+
+const resetAddress = () => {
+  addressField.value = `Lat: ${CENTER_LAT}, Lng: ${CENTER_LNG}`;
+};
+
 marker.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
   addressField.value =
@@ -58,6 +75,8 @@ const promoIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
+const markerGroup = L.layerGroup().addTo(map);
+
 const renderPoints = (points) => {
   points.forEach((point) => {
     const promoMarkers = L.marker(
@@ -70,9 +89,9 @@ const renderPoints = (points) => {
     );
 
     promoMarkers
-      .addTo(map)
+      .addTo(markerGroup)
       .bindPopup(createPromoPopup(point));
   });
 };
 
-export {renderPoints};
+export {renderPoints, resetMap, resetAddress};
