@@ -6,7 +6,7 @@ const TITLE = [
   'Палата №6',
   'Дворец Саурона',
   'Покои в Хогвартсе',
-  'Ходячий Замок'
+  'Ходячий Замок',
 ];
 
 const TYPE = [
@@ -14,19 +14,19 @@ const TYPE = [
   'flat',
   'house',
   'bungalow',
-  'hotel'
+  'hotel',
 ];
 
 const CHECKIN = [
   '12:00',
   '13:00',
-  '14:00'
+  '14:00',
 ];
 
 const CHECKOUT = [
   '12:00',
   '13:00',
-  '14:00'
+  '14:00',
 ];
 
 const FEATURES = [
@@ -35,7 +35,7 @@ const FEATURES = [
   'parking',
   'washer',
   'elevator',
-  'conditioner'
+  'conditioner',
 ];
 
 const DESCRIPTION = [
@@ -48,7 +48,7 @@ const DESCRIPTION = [
 const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
 const MIN_LAT = 35.65000;
@@ -92,7 +92,7 @@ const createPromo = () => {
     location: {
       lat,
       lng,
-    }
+    },
   };
 };
 
