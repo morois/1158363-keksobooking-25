@@ -1,4 +1,4 @@
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png' ];
 const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 
 const avatarChooser = document.querySelector('#avatar');
