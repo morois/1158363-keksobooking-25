@@ -1,5 +1,6 @@
 import { postData } from './fetch-request.js';
 import { resetMap, resetAddress } from './map.js';
+import { avatarReset, resetImage } from './photos.js';
 
 const adForm = document.querySelector('.ad-form');
 const resetButton = document.querySelector('.ad-form__reset');
@@ -146,6 +147,8 @@ const resetForm = () => {
   priceSlider.noUiSlider.reset();
   resetMap();
   resetAddress();
+  avatarReset();
+  resetImage();
 };
 
 resetButton.addEventListener('click', resetForm);
