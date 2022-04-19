@@ -73,7 +73,7 @@ const createPromoPopup = (point) => {
   promoElement.querySelector('.popup__text--time').textContent = popupTime;
   promoElement.querySelector('.popup__features').innerHTML = getPopupFeatures(offer.features || []);
   promoElement.querySelector('.popup__description').textContent = offer.description;
-  promoElement.querySelector('.popup__photos').innerHTML = getPopupPhotos(offer.photos);
+  promoElement.querySelector('.popup__photos').innerHTML = getPopupPhotos(offer.photos || []);
 
   return promoElement;
 };
