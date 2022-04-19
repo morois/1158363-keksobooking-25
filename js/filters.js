@@ -3,27 +3,27 @@ import { debounce } from './debounce.js';
 
 const DATA_COUNT = 10;
 
-const mapFilters = document.querySelector('.map__filters');
+const mapFiltersElements = document.querySelector('.map__filters');
 
-const typeFilter = mapFilters.querySelector('#housing-type');
-const priceFilter = mapFilters.querySelector('#housing-price');
-const roomsFilter = mapFilters.querySelector('#housing-rooms');
-const guestsFilter = mapFilters.querySelector('#housing-guests');
-const wifiFilter = mapFilters.querySelector('#filter-wifi');
-const dishwasherFilter = mapFilters.querySelector('#filter-dishwasher');
-const parkingFilter = mapFilters.querySelector('#filter-parking');
-const washerFilter = mapFilters.querySelector('#filter-washer');
-const elevatorFilter = mapFilters.querySelector('#filter-elevator');
-const conditionerFilter = mapFilters.querySelector('#filter-conditioner');
+const typeFilterElement = mapFiltersElements.querySelector('#housing-type');
+const priceFilterElement = mapFiltersElements.querySelector('#housing-price');
+const roomsFilterElement = mapFiltersElements.querySelector('#housing-rooms');
+const guestsFilterElement = mapFiltersElements.querySelector('#housing-guests');
+const wifiFilterElement = mapFiltersElements.querySelector('#filter-wifi');
+const dishwasherFilterElement = mapFiltersElements.querySelector('#filter-dishwasher');
+const parkingFilterElement = mapFiltersElements.querySelector('#filter-parking');
+const washerFilterElement = mapFiltersElements.querySelector('#filter-washer');
+const elevatorFilterElement = mapFiltersElements.querySelector('#filter-elevator');
+const conditionerFilterElement = mapFiltersElements.querySelector('#filter-conditioner');
 
-const filters = [typeFilter, priceFilter, roomsFilter, guestsFilter];
+const filters = [typeFilterElement, priceFilterElement, roomsFilterElement, guestsFilterElement];
 const featureFilters = [
-  wifiFilter,
-  dishwasherFilter,
-  parkingFilter,
-  washerFilter,
-  elevatorFilter,
-  conditionerFilter
+  wifiFilterElement,
+  dishwasherFilterElement,
+  parkingFilterElement,
+  washerFilterElement,
+  elevatorFilterElement,
+  conditionerFilterElement,
 ];
 
 const filterPoints = (data) => () => {
