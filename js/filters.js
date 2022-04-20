@@ -1,7 +1,4 @@
-import {renderPoints} from './map.js';
 import { debounce } from './debounce.js';
-
-const DATA_COUNT = 10;
 
 const mapFiltersElements = document.querySelector('.map__filters');
 
@@ -16,8 +13,8 @@ const washerFilterElement = mapFiltersElements.querySelector('#filter-washer');
 const elevatorFilterElement = mapFiltersElements.querySelector('#filter-elevator');
 const conditionerFilterElement = mapFiltersElements.querySelector('#filter-conditioner');
 
-const filters = [typeFilterElement, priceFilterElement, roomsFilterElement, guestsFilterElement];
-const featureFilters = [
+const selectFilterElements = [typeFilterElement, roomsFilterElement, guestsFilterElement];
+const featureFilterElements = [
   wifiFilterElement,
   dishwasherFilterElement,
   parkingFilterElement,
@@ -26,31 +23,45 @@ const featureFilters = [
   conditionerFilterElement,
 ];
 
-const filterPoints = (data) => () => {
-  let filteredPoints = [...data];
-  filters.forEach((filter) => {
+const isInPriceRange = (point) => {
+  const { value } = priceFilterElement;
+  const { price } = point.offer;
+  return (
+    value === 'any' ||
+    (value === 'low' && price < 10000) ||
+    (value === 'middle' &&
+      point.offer.price > 10000 &&
+      point.offer.price < 50000) ||
+    (value === 'high' && price > 50000)
+  );
+
+};
+
+const filterPoints = (data) => data.filter((point) => {
+  for (const filter of selectFilterElements) {
     const { name, value } = filter;
-    if (value === 'any') {
-      return;
-    }
     const parameter = name.split('-')[1];
-    filteredPoints = filteredPoints.filter((point) => String(point.offer[parameter]) === value);
-  });
-  featureFilters.forEach((filter) => {
-    const { value, checked } = filter;
-    if (!checked) {
-      return;
+    if (value !== 'any' && String(point.offer[parameter]) !== value) {
+      return false;
     }
-    filteredPoints = filteredPoints.filter((point) => point.offer.features && point.offer.features.includes(value));
+  }
+  if (!isInPriceRange(point)) {
+    return false;
+  }
+  for (const filter of featureFilterElements) {
+    const { value, checked } = filter;
+    const features = point.offer.features || [];
+    if (checked && !features.includes(value)) {
+      return false;
+    }
+  }
+  return true;
+});
+
+const initFilters = (onChange) => {
+  [...selectFilterElements, ...featureFilterElements, priceFilterElement].forEach((filter) => {
+    filter.addEventListener('change', debounce(onChange));
   });
-  renderPoints(filteredPoints.slice(0, DATA_COUNT));
 };
 
-const initFilters = (data) => {
-  [...filters, ...featureFilters].forEach((filter) => {
-    filter.addEventListener('change', debounce(filterPoints(data)));
-  });
-  filterPoints(data)();
-};
-
-export { initFilters };
+export { initFilters, filterPoints };

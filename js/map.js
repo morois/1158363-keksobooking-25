@@ -11,7 +11,7 @@ addDisabled();
 const map = L.map('map-canvas')
   .on('load', () => {
     removeDisabled();
-    addressField.value = `Lat: ${CENTER_LAT}, Lng: ${CENTER_LNG}`;
+    addressField.value = `${CENTER_LAT}, ${CENTER_LNG}`;
   })
   .setView(
     {
@@ -43,31 +43,14 @@ const marker = L.marker(
   }
 );
 
-const resetMap = () => {
-  marker.setLatLng({
-    lat: CENTER_LAT,
-    lng: CENTER_LNG,
-  });
-
-  map.setView({
-    lat: CENTER_LAT,
-    lng: CENTER_LNG,
-  }, ZOOM );
-};
-
-const resetAddress = () => {
-  addressField.value = `Lat: ${CENTER_LAT}, Lng: ${CENTER_LNG}`;
-};
-
 marker.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
   addressField.value =
-    `Lat: ${coordinates.lat.toFixed(5)}, ` +
-    `Lng: ${coordinates.lng.toFixed(5)}`;
+    `${coordinates.lat.toFixed(5)}, ` +
+    `${coordinates.lng.toFixed(5)}`;
 });
 
 marker.addTo(map);
-
 
 const promoIcon = L.icon({
   iconUrl: './img/pin.svg',
@@ -95,4 +78,16 @@ const renderPoints = (points) => {
   });
 };
 
-export {renderPoints, resetMap, resetAddress};
+const resetMap = () => {
+  marker.setLatLng({
+    lat: CENTER_LAT,
+    lng: CENTER_LNG,
+  });
+  map.closePopup();
+  map.setView({
+    lat: CENTER_LAT,
+    lng: CENTER_LNG,
+  }, ZOOM );
+};
+
+export { renderPoints, resetMap };

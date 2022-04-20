@@ -5,6 +5,7 @@ const avatarChooser = document.querySelector('#avatar');
 const avatarPreview = document.querySelector('#avatar-preview');
 const imageChooser = document.querySelector('#images');
 const imagePreview = document.querySelector('.ad-form__photo');
+const image = document.createElement('img');
 
 const addAvatar = () => {
   avatarChooser.addEventListener('change', () => {
@@ -19,20 +20,8 @@ const addAvatar = () => {
   });
 };
 
-const avatarReset = () => {
+const resetAvatar = () => {
   avatarPreview.src = DEFAULT_AVATAR;
-};
-
-const createImage = (file) => {
-  const img = document.createElement('img');
-  img.width = 70;
-  img.height = 70;
-  img.alt = 'Фотография жилья';
-  img.src = URL.createObjectURL(file);
-
-  imagePreview.append(img);
-
-  return imagePreview;
 };
 
 const addImage = () => {
@@ -41,15 +30,20 @@ const addImage = () => {
     const fileName = file.name.toLowerCase();
 
     const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-
-    if (matches) {
-      createImage(file);
+    if (matches && !(imagePreview.children.length)) {
+      image.width = '70';
+      image.height= '70';
+      image.alt = 'Фотография жилья';
+      image.src = URL.createObjectURL(file);
+      imagePreview.append(image);
+    } else {
+      imagePreview.firstElementChild.src = URL.createObjectURL(file);
     }
   });
 };
 
 const resetImage = () => {
-  imagePreview.removeChild(imagePreview.children[0]);
+  image.remove();
 };
 
-export {addAvatar, avatarReset, addImage, resetImage};
+export {addAvatar, resetAvatar, addImage, resetImage};

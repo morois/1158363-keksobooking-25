@@ -4,21 +4,29 @@ const errorMessage = body.querySelector('#error').content.querySelector('.error'
 const map = body.querySelector('.map');
 const submitButton = document.querySelector('.ad-form__submit');
 
-const messageSuccess = () => {
+const getMessageSuccess = () => {
   const messageNode = successMessage.cloneNode(true);
   submitButton.setAttribute('disabled', 'true');
   window.addEventListener('click', () => {
     messageNode.remove();
     submitButton.removeAttribute('disabled');
   });
+  window.addEventListener('keydown', (e) => {
+    if(e.code === 'Escape') {
+      messageNode.remove();
+      submitButton.removeAttribute('disabled');
+    }
+  });
   body.appendChild(messageNode);
 };
 
-const messageError = () => {
+const getMessageError = () => {
   const messageNode = errorMessage.cloneNode(true);
+  submitButton.setAttribute('disabled', 'true');
   const button = messageNode.querySelector('.error__button');
   button.addEventListener('click', () => {
     messageNode.remove();
+    submitButton.removeAttribute('disabled');
   });
   body.appendChild(messageNode);
 };
@@ -40,4 +48,4 @@ const showAlert = (message) => {
   map.append(alertContainer);
 };
 
-export { messageSuccess, messageError, showAlert };
+export { getMessageSuccess, getMessageError, showAlert };
