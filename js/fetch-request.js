@@ -1,5 +1,4 @@
 import { getMessageSuccess, getMessageError, showAlert } from './messages.js';
-import { resetForm } from './form.js';
 
 const GET_DATA_SERVER = 'https://25.javascript.pages.academy/keksobooking/data';
 const POST_DATA_SERVER = 'https://25.javascript.pages.academy/keksobooking';
@@ -18,13 +17,13 @@ const loadData = (onSuccess) => {
     );
 };
 
-const postData = (data) => {
+const postData = (data, onSucess) => {
   fetch(POST_DATA_SERVER, {
     method: 'POST',
     body: data,
   }).then(() => {
     getMessageSuccess();
-    resetForm();
+    onSucess();
   }).catch(getMessageError);
 };
 

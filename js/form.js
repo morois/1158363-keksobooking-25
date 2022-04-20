@@ -46,7 +46,7 @@ const validatePriceMax = (max) => {
   return max;
 };
 
-const validateForm = (form) => {
+const validateForm = (form, callback) => {
   const capacityField = form.querySelector('#capacity');
   const roomsField = form.querySelector('#room_number');
   const titleField = form.querySelector('#title');
@@ -107,7 +107,7 @@ const validateForm = (form) => {
 
     if (isValid) {
       const formData = new FormData(evt.target);
-      postData(formData);
+      postData(formData, callback);
     }
   });
 
@@ -143,7 +143,7 @@ const validateForm = (form) => {
   });
 };
 
-const resetForm = () => {
+const resetForm = (callback) => () => {
   adForm.reset();
   mapFilters.reset();
   priceSlider.noUiSlider.reset();
@@ -151,10 +151,12 @@ const resetForm = () => {
   coordinatesField.setAttribute('value', COORDINATES);
   resetAvatar();
   resetImage();
+  callback();
 };
 
-resetButton.addEventListener('click', resetForm);
+const initForm = (callback) => {
+  resetButton.addEventListener('click', resetForm(callback));
+  validateForm(adForm, resetForm(callback));
+};
 
-validateForm(adForm);
-
-export {resetForm};
+export {initForm};
